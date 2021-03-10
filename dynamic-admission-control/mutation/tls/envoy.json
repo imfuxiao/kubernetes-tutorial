@@ -1,0 +1,23 @@
+{
+  "CN": "envoy-init",
+  "hosts": [
+    "127.0.0.1",
+    "envoy-init",
+    "envoy-init.envoy",
+    "envoy-init.envoy.svc",
+    "envoy-init.envoy.svc.cluster",
+    "envoy-init.envoy.svc.cluster.local"
+  ],
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "CHINA",
+      "ST": "SHAANXI",
+      "L": "XIAN"
+    }
+  ]
+}
+

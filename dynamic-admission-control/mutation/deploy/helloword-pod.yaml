@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: helloworld
+  name: helloworld
+spec:
+  containers:
+    - image: registry.cn-hangzhou.aliyuncs.com/morse_k8s/helloworld:0.1.0
+      name: helloworld
+      imagePullPolicy: IfNotPresent
