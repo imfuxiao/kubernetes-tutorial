@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: etcd-single-node
+  name: etcd-single-node
+  namespace: etcd
+spec:
+  selector:
+    matchLabels:
+      app: etcd-single-node
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: etcd-single-node
+      name: etcd-single-node
+    spec:
+      serviceAccountName: etcd-single-node
+      containers:
+        - name: etcd-controller
+          image: registry.cn-hangzhou.aliyuncs.com/morse_k8s/etcd-controller:0.1.0
+          imagePullPolicy: Always
+#          args:
+#            - "-annotation=initializer.kubernetes.io/envoy"
+#            - "-require-annotation=true"
+#            - "-tls-cert-file=/etc/tls/tls-crt.pem"
+#            - "-tls-private-key-file=/etc/tls/tls-key.pem"
+#          volumeMounts:
+#            - mountPath: /etc/tls
+#              name: tls
+#              readOnly: true
+#      volumes:
+#        - name: tls
+#          secret:
+#            secretName: envoy-init-svc-tls
+#            items:
+#              - key: tls.crt
+#                path: tls-crt.pem
+#              - key: tls.key
+#                path: tls-key.pem
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: etcd-single-node
+  namespace: etcd
+spec:
+  ports:
+    - port: 443
+      targetPort: 443
+      protocol: TCP
+  selector:
+    app: etcd-single-node

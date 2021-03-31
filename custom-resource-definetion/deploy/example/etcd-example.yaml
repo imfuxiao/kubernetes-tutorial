@@ -1,0 +1,9 @@
+apiVersion: crd.fuxiao.dev/v1alpha1
+kind: Etcd
+metadata:
+  name: etcd-example-01
+spec:
+  name: "etcd-demo-01"
+  dataDir: "/data1"
+  snapshotCount: 1000
+  image: "registry.cn-hangzhou.aliyuncs.com/morse_k8s/etcd:3.4.13-0"

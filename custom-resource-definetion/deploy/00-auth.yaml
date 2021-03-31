@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: etcd
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: etcd-single-node
+rules:
+  - apiGroups:
+      - "*"
+    resources:
+      - pods
+      - etcds
+    verbs:
+      - create
+      - delete
+      - deletecollection
+      - get
+      - list
+      - patch
+      - update
+      - watch
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: etcd-single-node
+  namespace: etcd
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: etcd-single-node
+  namespace: etcd
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: etcd-single-node
+subjects:
+  - kind: ServiceAccount
+    name: etcd-single-node
+    namespace: etcd
+---
